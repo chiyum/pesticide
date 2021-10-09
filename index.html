@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>農藥稀釋比例倍數</title>
+    <link rel="shortcut icon" href="./img/icon32.png">
+    <meta name='description' content='農藥稀釋倍數比例' />
+    <meta property="og:title" content="農藥稀釋倍數比例">
+    <meta property="og:description" content="農藥稀釋倍數比例">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://chiyum.github.io/pesticide/">
+    <meta property="og:image" content="./img/icon192.png">
+    <link href="./img/icon192.png" rel="apple-touch-icon" />
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="nav">
+            <ul>
+                <li>稀釋倍數換算表</li>
+                <li>稀釋倍數自訂義換算表</li>
+                <div class="close"><ion-icon name="close-outline"></ion-icon></div>
+            </ul>
+        </div>
+        <div class="header">
+            <div class="navBtn">
+                <ion-icon name="list-outline"></ion-icon>
+            </div>
+            <div class="logo">農藥稀釋倍數比例</div>
+            <div class="none"></div>
+        </div>
+        <div class="main" id="mainId">
+            <div class="bg">
+                <p>賴天賜&李秀英</p>
+                <p>提供</p>
+            </div>
+            <div class="choose active">
+                <select name="num" id="numId">
+                    <option value="50倍">請選擇倍數</option>
+                    <option value="50倍">50倍</option>
+                    <option value="100倍">100倍</option>
+                    <option value="200倍">200倍</option>
+                    <option value="400倍">400倍</option>
+                    <option value="500倍">500倍</option>
+                    <option value="600倍">600倍</option>
+                    <option value="700倍">700倍</option>
+                    <option value="750倍">750倍</option>
+                    <option value="800倍">800倍</option>
+                    <option value="1000倍">1000倍</option>
+                    <option value="1200倍">1200倍</option>
+                    <option value="1500倍">1500倍</option>
+                    <option value="2000倍">2000倍</option>
+                    <option value="2500倍">2500倍</option>
+                    <option value="3000倍">3000倍</option>
+                    <option value="4000倍">4000倍</option>
+                    <option value="5000倍">5000倍</option>
+                    <option value="6000倍">6000倍</option>
+                </select>
+                <ul class="list">
+                    <li>稀釋倍數:<span>50</span>倍</li>
+                    <li>500公升水<span>10000</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>5000</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>3000</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>400</span>克(c.c.)藥量</li>
+                </ul>
+            </div>
+            <div class="enter">
+                <div class="shop">
+                    <p>
+                        <span>倍數</span>
+                        <input type="text" placeholder="請輸入倍數"></p>
+                    <p>
+                        <span>公克</span>
+                        <input type="text" placeholder="請輸入農藥cc數">
+                    </p>
+                    <input type="button" value="計算" class="enterBtn">
+                </div>
+                <ul class="enterList">
+                    <li>稀釋倍數: 6000 倍</li>
+                    <li>農藥: 10 公克(c.c.)</li>
+                    <li>水量: 10 公升</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer" id="footerId">
+            <div class="goTop">
+                <ion-icon name="chevron-up-outline" class="footerIcon"></ion-icon>
+            </div>
+            <ul>
+                <li>稀釋倍數換算表</li>
+                <li>稀釋倍數自訂義換算表</li>
+                <li>本站只提供換算功能,無任何商業用途.
+                    <br>
+                    Copyright © 2021 Holdkibor
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script>
+
+    
+
+        (function () { 
+
+            let nav = document.querySelector('.nav')
+            nav.style['display'] = 'none'
+
+         }());
+        let nav = document.querySelectorAll('.nav ul li');
+        let footerNav = document.querySelectorAll('.footer ul li');//footerNav
+        let choose = document.querySelector('.choose');//換算表
+        let enter =document.querySelector('.enter');//自訂義換算表
+
+        function mainToggle(){
+           
+            if(choose.className =='choose active'){
+                choose.classList.toggle('active');
+                enter.classList.toggle('active');
+            }else{
+                choose.classList.toggle('active');
+                enter.classList.toggle('active');
+            }
+
+        };
+
+        function mainChangeChoose(){
+
+            choose.classList.add('active')
+            enter.classList.remove('active')
+            closeNav()
+        };
+
+        function mainChangeEnter(){
+
+            choose.classList.remove('active')
+            enter.classList.add('active')
+            closeNav()
+        }
+
+        function closeNav(){
+
+            let nav = document.querySelector('.nav')
+            nav.style['display'] = 'none'
+            window.scrollTo(100,176)
+        }
+
+        nav[0].addEventListener('click',mainChangeChoose);
+        nav[1].addEventListener('click',mainChangeEnter);
+        footerNav[0].addEventListener('click',mainChangeChoose);
+        footerNav[1].addEventListener('click',mainChangeEnter);
+
+        $(document).ready(function () {
+            
+            $('.goTop').click(function(e){
+                $('html,body').animate({scrollTop:0},400)
+            })
+
+            // 關閉nav
+            $('.close').click(function() {
+                $('.nav').fadeOut(500)
+            })
+
+            // 開啟nav
+            $('.navBtn').click(function() {
+                $('.nav').fadeIn(500)
+            })
+
+        });
+
+
+        // 功能區
+
+
+        let enterBtn = document.querySelector('.enterBtn');
+        enterBtn.addEventListener('click',function(){
+
+            alert('尚在開發中，請耐心等候')
+
+        })
+
+        let numId = document.querySelector('#numId');//換算表選單
+        numId.addEventListener('change',addchooseList)
+
+        function addchooseList(e){
+            let list = document.querySelector('.list');//輸出選單
+            let choice = e.target.value;
+            switch(choice){
+
+                case '50倍':
+                let str50 = `
+                    <li>稀釋倍數:<span>50</span>倍</li>
+                    <li>500公升水<span>10000</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>5000</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>3000</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>400</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str50;
+                break;
+
+                case '100倍':
+                let str100 = `
+                    <li>稀釋倍數:<span>100</span>倍</li>
+                    <li>500公升水<span>5000</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>2500</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>1500</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>200</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str100;
+                break;
+
+                case '200倍':
+                let str200 = `
+                    <li>稀釋倍數:<span>200</span>倍</li>
+                    <li>500公升水<span>2500</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>1000</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>600</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>80</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str200;
+                break;
+
+                case '400倍':
+                let str400 = `
+                    <li>稀釋倍數:<span>400</span>倍</li>
+                    <li>500公升水<span>1250</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>500</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>300</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>40</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str400;
+                break;
+
+                case '500倍':
+                let str500 = `
+                    <li>稀釋倍數:<span>500</span>倍</li>
+                    <li>500公升水<span>1000</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>400</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>240</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>32</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str500;
+                break;
+
+                case '600倍':
+                let str600 = `
+                    <li>稀釋倍數:<span>600</span>倍</li>
+                    <li>500公升水<span>830</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>333</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>200</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>27</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str600;
+                break;
+
+                case '700倍':
+                let str700 = `
+                    <li>稀釋倍數:<span>700</span>倍</li>
+                    <li>500公升水<span>715</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>286</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>171</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>23</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str700;
+                break;
+
+                case '750倍':
+                let str750 = `
+                    <li>稀釋倍數:<span>750</span>倍</li>
+                    <li>500公升水<span>666</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>267</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>160</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>21</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str750;
+                break;
+
+                case '800倍':
+                let str800 = `
+                    <li>稀釋倍數:<span>800</span>倍</li>
+                    <li>500公升水<span>625</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>250</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>150</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>20</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str800;
+                break;
+
+                case '1000倍':
+                let str1000 = `
+                    <li>稀釋倍數:<span>1000</span>倍</li>
+                    <li>500公升水<span>500</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>200</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>120</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>16</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str1000;
+                break;
+
+                case '1200倍':
+                let str1200 = `
+                    <li>稀釋倍數:<span>1200</span>倍</li>
+                    <li>500公升水<span>417</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>167</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>100</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>13</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str1200;
+                break;
+
+                case '1500倍':
+                let str1500 = `
+                    <li>稀釋倍數:<span>1500</span>倍</li>
+                    <li>500公升水<span>333</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>133</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>80</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>11</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str1500;
+                break;
+                
+                case '2000倍':
+                let str2000 = `
+                    <li>稀釋倍數:<span>2000</span>倍</li>
+                    <li>500公升水<span>250</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>100</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>60</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>8</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str2000;
+                break;
+
+                case '2500倍':
+                let str2500 = `
+                    <li>稀釋倍數:<span>2500</span>倍</li>
+                    <li>500公升水<span>200</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>80</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>48</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>6</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str2500;
+                break;
+
+                case '3000倍':
+                let str3000 = `
+                    <li>稀釋倍數:<span>3000</span>倍</li>
+                    <li>500公升水<span>167</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>67</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>40</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>5</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str3000;
+                break;
+
+                case '4000倍':
+                let str4000 = `
+                    <li>稀釋倍數:<span>4000</span>倍</li>
+                    <li>500公升水<span>125</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>50</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>30</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>4</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str4000;
+                break;
+
+                case '5000倍':
+                let str5000 = `
+                    <li>稀釋倍數:<span>5000</span>倍</li>
+                    <li>500公升水<span>100</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>40</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>24</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>3</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str5000;
+                break;
+
+                case '6000倍':
+                let str6000 = `
+                    <li>稀釋倍數:<span>6000</span>倍</li>
+                    <li>500公升水<span>83</span>克(c.c.)藥量</li>
+                    <li>200公升水<span>33</span>克(c.c.)藥量</li>
+                    <li>120公升水<span>20</span>克(c.c.)藥量</li>
+                    <li>16公升水<span>2.5</span>克(c.c.)藥量</li>
+                `
+                list.innerHTML = str6000;
+                break;
+
+            }
+
+        }
+
+    
+    
+    </script>
+</body>
+
+</html>
