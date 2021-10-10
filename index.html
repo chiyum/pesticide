@@ -169,6 +169,25 @@
         footerNav[0].addEventListener('click',mainChangeChoose);
         footerNav[1].addEventListener('click',mainChangeEnter);
 
+        //固定choose與enter寬度
+        window.onresize = function(){
+            chooseAndEnterSetSize()
+        };
+        chooseAndEnterSetSize()
+        function chooseAndEnterSetSize(){
+            let list = document.querySelector('.list');
+            if(choose.offsetWidth < 440){
+                list.style['font-size'] = 28 +'px'
+                enter.style['height'] = choose.offsetHeight + 'px';
+                // enter.style['Height'] = choose.offsetHeight + 'px';
+                // console.log(enter.offsetHeight,'觸發')
+            }
+
+            // enter.style['height'] = choose.offsetHeight;
+            // console.log(enter.offsetHeight,choose.offsetHeight); 
+
+        }
+
         $(document).ready(function () {
             
             $('.goTop').click(function(e){
