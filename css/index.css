@@ -41,16 +41,31 @@ li {
 }
 
 .container .nav ul {
-  margin-top: 40vh;
+  margin-top: 20vh;
   font-size: 40px;
   color: #3b9e1b;
 }
 
 .container .nav ul li {
+  position: relative;
   padding-left: 5px;
   margin: 20px;
   border-left: 3px solid black;
   cursor: pointer;
+}
+
+.container .nav ul li .explain {
+  display: none;
+  position: absolute;
+  top: 60px;
+  right: 0;
+  padding: 10px;
+  font-size: 20px;
+  color: black;
+  border-radius: 10px;
+  -webkit-box-shadow: 1px 1px 1px 1px #c3c3c3;
+          box-shadow: 1px 1px 1px 1px #c3c3c3;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 .container .nav ul li:hover {
@@ -168,6 +183,14 @@ li {
   padding: 20px;
 }
 
+.container .main .choose .list li {
+  padding: 2px;
+}
+
+.container .main .choose .list li:nth-child(odd) {
+  background-color: #eaf0ed;
+}
+
 .container .main .enter.active {
   z-index: 2;
 }
@@ -203,6 +226,7 @@ li {
 }
 
 .container .main .enter .shop p input {
+  padding-left: 2px;
   position: relative;
   bottom: 5px;
   height: 20px;
@@ -223,6 +247,11 @@ li {
 .container .main .enter .enterList {
   margin-top: 30px;
   font-size: 30px;
+}
+
+.container .main .enter .enterList li {
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(11, 185, 11, 0.5);
 }
 
 .container .footer {

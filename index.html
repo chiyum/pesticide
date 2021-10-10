@@ -22,7 +22,20 @@
         <div class="nav">
             <ul>
                 <li>稀釋倍數換算表</li>
-                <li>稀釋倍數自訂義換算表</li>
+                <li>自訂義換算表</li>
+                <li id="explainId">說明
+                    <div  class="explain">
+                        <p>本公式參考至國立中興大學農業推廣中心及台灣安全高品質農業推廣協會.</p>
+                        <p>
+                            EX.
+                            標準的稀釋濃度是:原藥用量 = 水量 ÷ 倍數
+                            <br>
+                            但此次提供的換算表,百倍倍數原藥在2500(含)以下的濃度有稍微提高.
+                            <br>
+                            每一公克的原藥少兌20cc的水量，若有額外需求需自行注意。
+                        </p>
+                    </div>
+                </li>
                 <div class="close"><ion-icon name="close-outline"></ion-icon></div>
             </ul>
         </div>
@@ -62,20 +75,20 @@
                 </select>
                 <ul class="list">
                     <li>稀釋倍數:<span>50</span>倍</li>
-                    <li>500公升水<span>10000</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>5000</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>3000</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>400</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>10000</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>5000</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>3000</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>400</span>克(c.c.)藥量</li>
                 </ul>
             </div>
             <div class="enter">
                 <div class="shop">
                     <p>
                         <span>倍數</span>
-                        <input type="text" placeholder="請輸入倍數"></p>
+                        <input type="text" placeholder="請輸入倍數" id="multipleId"></p>
                     <p>
                         <span>公克</span>
-                        <input type="text" placeholder="請輸入農藥cc數">
+                        <input type="text" placeholder="請輸入農藥cc數" id="ccId">
                     </p>
                     <input type="button" value="計算" class="enterBtn">
                 </div>
@@ -172,6 +185,12 @@
                 $('.nav').fadeIn(500)
             })
 
+            // 說明欄開啟
+            $('#explainId').on('click',function(){
+                $('.explain').slideToggle(500);
+            })
+
+
         });
 
 
@@ -181,9 +200,31 @@
         let enterBtn = document.querySelector('.enterBtn');
         enterBtn.addEventListener('click',function(){
 
-            alert('尚在開發中，請耐心等候')
+            let multiple = parseInt(document.querySelector('#multipleId').value);
+            let list = document.querySelector('.enterList');
+            let cc = parseInt(document.querySelector('#ccId').value);
+            let total;
+            if(multiple ==100&&cc<=2500){
 
-        })
+                total = (multiple*cc)-(cc*20);
+                console.log(total / 1000 + '公升')
+                list.innerHTML=`
+                    <li> 稀釋倍數: ${multiple} 倍</li>
+                    <li>農藥: ${cc} 公克(c.c.)</li>
+                    <li>水量: ${total / 1000} 公升 /${total} cc</li>
+                `
+
+            }else{
+                total = multiple*cc;
+                console.log(total)
+                list.innerHTML=`
+                    <li> 稀釋倍數: ${multiple} 倍</li>
+                    <li>農藥: ${cc} 公克(c.c.)</li>
+                    <li>水量: ${total / 1000} 公升 / ${total}毫升(c.c.)</li>
+                    `
+            }
+
+        });
 
         let numId = document.querySelector('#numId');//換算表選單
         numId.addEventListener('change',addchooseList)
@@ -196,10 +237,10 @@
                 case '50倍':
                 let str50 = `
                     <li>稀釋倍數:<span>50</span>倍</li>
-                    <li>500公升水<span>10000</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>5000</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>3000</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>400</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>10000</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>5000</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>3000</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>400</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str50;
                 break;
@@ -207,10 +248,10 @@
                 case '100倍':
                 let str100 = `
                     <li>稀釋倍數:<span>100</span>倍</li>
-                    <li>500公升水<span>5000</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>2500</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>1500</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>200</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>5000</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>2500</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>1500</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>200</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str100;
                 break;
@@ -218,10 +259,10 @@
                 case '200倍':
                 let str200 = `
                     <li>稀釋倍數:<span>200</span>倍</li>
-                    <li>500公升水<span>2500</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>1000</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>600</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>80</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>2500</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>1000</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>600</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>80</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str200;
                 break;
@@ -229,10 +270,10 @@
                 case '400倍':
                 let str400 = `
                     <li>稀釋倍數:<span>400</span>倍</li>
-                    <li>500公升水<span>1250</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>500</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>300</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>40</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>1250</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>500</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>300</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>40</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str400;
                 break;
@@ -240,10 +281,10 @@
                 case '500倍':
                 let str500 = `
                     <li>稀釋倍數:<span>500</span>倍</li>
-                    <li>500公升水<span>1000</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>400</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>240</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>32</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>1000</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>400</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>240</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>32</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str500;
                 break;
@@ -251,10 +292,10 @@
                 case '600倍':
                 let str600 = `
                     <li>稀釋倍數:<span>600</span>倍</li>
-                    <li>500公升水<span>830</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>333</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>200</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>27</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>830</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>333</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>200</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>27</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str600;
                 break;
@@ -262,10 +303,10 @@
                 case '700倍':
                 let str700 = `
                     <li>稀釋倍數:<span>700</span>倍</li>
-                    <li>500公升水<span>715</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>286</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>171</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>23</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>715</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>286</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>171</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>23</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str700;
                 break;
@@ -273,10 +314,10 @@
                 case '750倍':
                 let str750 = `
                     <li>稀釋倍數:<span>750</span>倍</li>
-                    <li>500公升水<span>666</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>267</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>160</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>21</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>666</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>267</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>160</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>21</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str750;
                 break;
@@ -284,10 +325,10 @@
                 case '800倍':
                 let str800 = `
                     <li>稀釋倍數:<span>800</span>倍</li>
-                    <li>500公升水<span>625</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>250</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>150</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>20</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>625</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>250</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>150</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>20</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str800;
                 break;
@@ -295,10 +336,10 @@
                 case '1000倍':
                 let str1000 = `
                     <li>稀釋倍數:<span>1000</span>倍</li>
-                    <li>500公升水<span>500</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>200</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>120</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>16</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>500</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>200</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>120</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>16</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str1000;
                 break;
@@ -306,10 +347,10 @@
                 case '1200倍':
                 let str1200 = `
                     <li>稀釋倍數:<span>1200</span>倍</li>
-                    <li>500公升水<span>417</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>167</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>100</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>13</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>417</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>167</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>100</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>13</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str1200;
                 break;
@@ -317,10 +358,10 @@
                 case '1500倍':
                 let str1500 = `
                     <li>稀釋倍數:<span>1500</span>倍</li>
-                    <li>500公升水<span>333</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>133</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>80</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>11</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>333</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>133</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>80</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>11</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str1500;
                 break;
@@ -328,10 +369,10 @@
                 case '2000倍':
                 let str2000 = `
                     <li>稀釋倍數:<span>2000</span>倍</li>
-                    <li>500公升水<span>250</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>100</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>60</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>8</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>250</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>100</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>60</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>8</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str2000;
                 break;
@@ -339,10 +380,10 @@
                 case '2500倍':
                 let str2500 = `
                     <li>稀釋倍數:<span>2500</span>倍</li>
-                    <li>500公升水<span>200</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>80</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>48</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>6</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>200</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>80</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>48</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>6</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str2500;
                 break;
@@ -350,10 +391,10 @@
                 case '3000倍':
                 let str3000 = `
                     <li>稀釋倍數:<span>3000</span>倍</li>
-                    <li>500公升水<span>167</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>67</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>40</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>5</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>167</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>67</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>40</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>5</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str3000;
                 break;
@@ -361,10 +402,10 @@
                 case '4000倍':
                 let str4000 = `
                     <li>稀釋倍數:<span>4000</span>倍</li>
-                    <li>500公升水<span>125</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>50</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>30</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>4</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>125</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>50</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>30</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>4</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str4000;
                 break;
@@ -372,10 +413,10 @@
                 case '5000倍':
                 let str5000 = `
                     <li>稀釋倍數:<span>5000</span>倍</li>
-                    <li>500公升水<span>100</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>40</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>24</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>3</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>100</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>40</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>24</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>3</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str5000;
                 break;
@@ -383,10 +424,10 @@
                 case '6000倍':
                 let str6000 = `
                     <li>稀釋倍數:<span>6000</span>倍</li>
-                    <li>500公升水<span>83</span>克(c.c.)藥量</li>
-                    <li>200公升水<span>33</span>克(c.c.)藥量</li>
-                    <li>120公升水<span>20</span>克(c.c.)藥量</li>
-                    <li>16公升水<span>2.5</span>克(c.c.)藥量</li>
+                    <li>500公升水兌:<span>83</span>克(c.c.)藥量</li>
+                    <li>200公升水兌:<span>33</span>克(c.c.)藥量</li>
+                    <li>120公升水兌:<span>20</span>克(c.c.)藥量</li>
+                    <li>16公升水兌:<span>2.5</span>克(c.c.)藥量</li>
                 `
                 list.innerHTML = str6000;
                 break;
