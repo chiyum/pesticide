@@ -30,9 +30,9 @@
                             EX.
                             標準的稀釋濃度是:原藥用量 = 水量 ÷ 倍數
                             <br>
-                            但此次提供的換算表,百倍倍數原藥在2500(含)以下的濃度有稍微提高.
+                            但此次提供的換算表,100倍倍數原藥在2500(含)以下的濃度有稍微提高
                             <br>
-                            每一公克的原藥少兌20cc的水量，若有額外需求需自行注意。
+                            每一公克的原藥少兌20cc的水量及部分數字不符合公式結果，若有額外需求需自行注意。
                         </p>
                     </div>
                 </li>
@@ -130,7 +130,7 @@
         let footerNav = document.querySelectorAll('.footer ul li');//footerNav
         let choose = document.querySelector('.choose');//換算表
         let enter =document.querySelector('.enter');//自訂義換算表
-
+        let navExplain = document.querySelector('.explain');
         function mainToggle(){
            
             if(choose.className =='choose active'){
@@ -161,6 +161,7 @@
 
             let nav = document.querySelector('.nav');
             nav.style['display'] = 'none';
+            navExplain.style['display'] = 'none';
             window.scrollTo(100,176);
         }
 
@@ -222,16 +223,15 @@
 
             let multiple = parseInt(document.querySelector('#multipleId').value);
             let list = document.querySelector('.enterList');
-            let cc = parseInt(document.querySelector('#ccId').value);
+            // let cc = parseInt(document.querySelector('#ccId').value);
+            let cc = parseFloat(document.querySelector('#ccId').value);
             let total;
-
             if(multiple ==''|| cc==''||isNaN(cc)||isNaN(multiple)){
                 alert('請輸入正確數字')
                 return
             }
 
             if(multiple ==100&&cc<=2500){
-
                 total = (multiple*cc)-(cc*20);
                 console.log(total / 1000 + '公升')
                 list.innerHTML=`
@@ -242,7 +242,6 @@
 
             }else{
                 total = multiple*cc;
-                console.log(total)
                 list.innerHTML=`
                     <li> 稀釋倍數: ${multiple} 倍</li>
                     <li>農藥: ${cc} 公克(c.c.)</li>
