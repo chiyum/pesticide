@@ -224,6 +224,12 @@
             let list = document.querySelector('.enterList');
             let cc = parseInt(document.querySelector('#ccId').value);
             let total;
+
+            if(multiple ==''|| cc==''||isNaN(cc)||isNaN(multiple)){
+                alert('請輸入正確數字')
+                return
+            }
+
             if(multiple ==100&&cc<=2500){
 
                 total = (multiple*cc)-(cc*20);
