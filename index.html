@@ -145,23 +145,23 @@
 
         function mainChangeChoose(){
 
-            choose.classList.add('active')
-            enter.classList.remove('active')
-            closeNav()
+            choose.classList.add('active');
+            enter.classList.remove('active');
+            closeNav();
         };
 
         function mainChangeEnter(){
 
-            choose.classList.remove('active')
-            enter.classList.add('active')
-            closeNav()
+            choose.classList.remove('active');
+            enter.classList.add('active');
+            closeNav();
         }
 
         function closeNav(){
 
-            let nav = document.querySelector('.nav')
-            nav.style['display'] = 'none'
-            window.scrollTo(100,176)
+            let nav = document.querySelector('.nav');
+            nav.style['display'] = 'none';
+            window.scrollTo(100,176);
         }
 
         nav[0].addEventListener('click',mainChangeChoose);
@@ -178,6 +178,7 @@
             // 關閉nav
             $('.close').click(function() {
                 $('.nav').fadeOut(500)
+                $('.explain').fadeOut(500);
             })
 
             // 開啟nav
